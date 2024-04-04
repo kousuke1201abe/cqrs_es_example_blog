@@ -97,6 +97,16 @@ services:
     depends_on:
       mysql_write:
         condition: service_healthy
+  query_api:
+    build:
+      context: .
+      dockerfile: ./query/Dockerfile
+    ports:
+      - "3001:3001"
+    tty: true
+    depends_on:
+      mysql_read:
+        condition: service_healthy
   read_model_updater:
     build:
       context: .
