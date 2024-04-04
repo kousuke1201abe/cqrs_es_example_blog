@@ -4,9 +4,10 @@ require './infrastructure/mysql/event_store.rb'
 class EventStore
     def initialize(aggregateConverter, eventConverter, aggregateSerializer, eventSerializer, snapshotDecider)
         @client = Mysql2::Client.new(
-            host:     "localhost",
+            host:     "mysql_write",
             username: "root",
-            password: "",
+            password: "password",
+            port: 3306,
             database: "cqrs_es_example_blog_write_database"
         )
         @aggregateConverter=aggregateConverter

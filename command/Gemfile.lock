@@ -1,0 +1,28 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cgi (0.4.1)
+    erb (4.0.4)
+      cgi (>= 0.3.3)
+    ffi (1.16.3)
+    mini_portile2 (2.8.5)
+    mysql2 (0.5.6)
+    rake (13.2.0)
+    rdkafka (0.15.1)
+      ffi (~> 1.15)
+      mini_portile2 (~> 2.6)
+      rake (> 12)
+    webrick (1.8.1)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  erb
+  mysql2
+  rdkafka
+  webrick
+
+BUNDLED WITH
+   2.5.3

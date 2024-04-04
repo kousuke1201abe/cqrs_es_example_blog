@@ -1,5 +1,3 @@
-CREATE DATABASE cqrs_es_example_blog_write_database;
-
 USE cqrs_es_example_blog_write_database;
 
 CREATE TABLE events (
@@ -16,3 +14,5 @@ CREATE TABLE snapshots (
   version INT NOT NULL,
   UNIQUE KEY idx_aggregate_id_version (aggregate_id, version)
 );
+
+INSERT INTO events (aggregate_id, payload, sequence_number) VALUES ("trigger", "{}", 1);

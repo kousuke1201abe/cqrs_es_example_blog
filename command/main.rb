@@ -90,7 +90,7 @@ end
 
 server = WEBrick::HTTPServer.new({
     DocumentRoot:   './',
-    BindAddress:    '127.0.0.1',
+    BindAddress:    '0.0.0.0',
     Port:           3000,
 })
 server.mount('/', Servlet, ArticleProcessor.new(ArticleRepository.new))
