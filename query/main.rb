@@ -18,6 +18,16 @@ class Servlet < WEBrick::HTTPServlet::AbstractServlet
             
                 res.body = {result: results.map {|row| row.to_h} }.to_json.to_s
                 return
+            else
+                statement = @mysql_client.prepare("select articles.id, articles.title, articles.text, articles.thumbnail, articles.author_id, group_concat(bookmarks.executor_id) AS bookmarkers from articles left join bookmarks on bookmarks.article_id = articles.id where articles.id = ? group by articles.id")
+                result = statement.execute(path[-1])
+                row = result.first
+                unless row
+                    raise "not found error"
+                end
+
+                res.body = row.to_json.to_s
+                return
             end
         end
     end

@@ -53,6 +53,8 @@ kafka.each_message(topic: "debezium_cdc_topic.cqrs_es_example_blog_write_databas
             raise e
         end
     when "ArticleUnbookmarked"
+        puts(after)
+        puts(payload)
         begin
             statement = mysql_client.prepare("DELETE FROM bookmarks where article_id = ? AND executor_id = ?")
             statement.execute(after[:aggregate_id], payload[:executor_id])
@@ -60,5 +62,4 @@ kafka.each_message(topic: "debezium_cdc_topic.cqrs_es_example_blog_write_databas
             raise e
         end
     end
-    raise "unexpected event occurred"
 end

@@ -119,3 +119,10 @@ services:
       debezium:
         condition: service_started
     restart: always
+  client:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    ports:
+      - "4000:4000"
+    tty: true

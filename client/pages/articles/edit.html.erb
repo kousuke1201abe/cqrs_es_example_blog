@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title><%= @article["title"] %></title>
+        <style>
+            #parent {
+                display: flex;
+            }
+            #child1 {
+                flex-grow: 1;
+            }
+            #child2 {
+                flex-grow: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="parent">
+            <div id="child1">
+                <div><a href="/articles/<%=@article["id"]%>?executor_id=<%= @executor_id %>">back to the article page</a></div>
+                <section>
+                    <div>title</div>
+                    <form action="/articles/title_change_request?executor_id=<%=@executor_id%>" method="POST">
+                        <div>
+                            <input name="title" id="title">
+                            <input type="hidden" name="article_id" id="article_id" value=<%= @article["id"] %>>
+                            <input type="hidden" name="executor_id" id="executor_id" value=<%= @executor_id %>>
+                        </div>
+                        <div>
+                            <button>apply</button>
+                        </div>
+                    </form>
+                </section>
+                <section>
+                    <div>thumbnail</div>
+                    <form action="/articles/thumbnail_change_request?executor_id=<%=@executor_id%>" method="POST">
+                        <div>
+                            <input name="thumbnail" id="thumbnail"%>
+                            <input type="hidden" name="article_id" id="article_id" value=<%= @article["id"] %>>
+                            <input type="hidden" name="executor_id" id="executor_id" value=<%= @executor_id %>>
+                        </div>
+                        <div>
+                            <button>apply</button>
+                        </div>
+                    </form>
+                </section>
+                <section>
+                    <div>text</div>
+                    <form action="/articles/text_change_request?executor_id=<%=@executor_id%>" method="POST">
+                        <div>
+                            <textarea name="text" id="text" cols="100" rows="33"></textarea>
+                            <input type="hidden" name="article_id" id="article_id" value=<%= @article["id"] %>>
+                            <input type="hidden" name="executor_id" id="executor_id" value=<%= @executor_id %>>
+                        </div>
+                        <div>
+                            <button>apply</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <div id="child2">
+                <h2><%= @article["title"] %></h5>
+                <p>written by <%= @article["author_id"] %></p>
+                <img src=<%= @article["thumbnail"] %>>
+                <p><%= @article["text"] %></p>
+                <h3>bookmarked by</h3>
+                <% @article["bookmarkers"]&.split(",")&.each do |bookmarker| %>
+                    <div><%=bookmarker%></div>
+                <%end%>
+            </div>
+        </div>
+    </body>
+</html>

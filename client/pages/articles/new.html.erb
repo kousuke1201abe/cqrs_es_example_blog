@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>publish new article</title>
+    </head>
+    <body>
+        <form action="/articles/publish_request" method="POST">
+            <div>
+                <input type="hidden" name="executor_id" id="executor_id" value=<%=@executor_id%>>
+            </div>
+            <div>
+                <div>title</div>
+                <input name="title" id="title" />
+            </div>
+            <div>
+                <div>thumbnail</div>
+                <input name="thumbnail" id="thumbnail" />
+            </div>
+            <div>
+                <div>text</div>
+                <textarea name="text" id="text" cols="100" rows="33"></textarea>
+            </div>
+            <div>
+                <button>publish</button>
+            </div>
+        </form>
+    </body>
+</html>

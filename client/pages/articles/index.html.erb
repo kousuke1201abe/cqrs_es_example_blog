@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>Blog</title>
+    </head>
+    <body>
+        <h2>articles</h2>
+        <% @articles.each do |article| %>
+            <div><a href="/articles/<%= article["id"] %>?executor_id=<%= @executor_id %>"><%= article["title"] %></a> written by <%= article["author_id"] %></div>
+        <% end %>
+        <br>
+        <div><a href="/articles/new?executor_id=<%= @executor_id %>">publish new article</a></div>
+    </body>
+</html>

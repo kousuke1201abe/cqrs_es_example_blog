@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title><%= @article["title"] %></title>
+    </head>
+    <body>
+        <% if @article["author_id"] == @executor_id%>
+            <div><a href="/articles/<%= @article["id"] %>/edit?executor_id=<%= @executor_id %>">edit</a></div>
+        <% end %>
+        <div><a href="/articles/index?executor_id=<%= @executor_id %>">back to articles</a></div>
+        <h2><%= @article["title"] %></h5>
+        <p>written by <%= @article["author_id"] %></p>
+        <img src=<%= @article["thumbnail"] %>>
+        <p><%= @article["text"] %></p>
+        <% if @article["author_id"] != @executor_id %>
+            <% unless @article["bookmarkers"]&.split(",")&.include?(@executor_id)%>
+                <form action="/articles/bookmark_request?executor_id=<%= @executor_id %>" method="POST">
+                    <div>
+                        <input type="hidden" name="executor_id" id="executor_id" value=<%=@executor_id%>>
+                        <input type="hidden" name="article_id" id="article_id" value=<%=@article["id"]%>>
+                    </div>
+                    <div>
+                        <button>bookmark this article</button>
+                    </div>
+                </form>
+            <% else %>
+                <form action="/articles/unbookmark_request?executor_id=<%= @executor_id %>" method="POST">
+                    <div>
+                        <input type="hidden" name="executor_id" id="executor_id" value=<%=@executor_id%>>
+                        <input type="hidden" name="article_id" id="article_id" value=<%=@article["id"]%>>
+                    </div>
+                    <div>
+                        <button>unbookmark this article</button>
+                    </div>
+                </form>
+            <% end %>
+        <% end %>
+        <h3>bookmarked by</h3>
+        <% @article["bookmarkers"]&.split(",")&.each do |bookmarker| %>
+            <div><%=bookmarker%></div>
+        <%end%>
+    </body>
+</html>
