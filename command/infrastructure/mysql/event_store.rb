@@ -80,6 +80,9 @@ class EventStore
             end
             statement = @client.prepare("UPDATE snapshots SET version = ? where aggregate_id = ? and version = ?")
             statement.execute(version + 1, event.aggregate_id, version)
+            if @client.query("SELECT ROW_COUNT()").first["ROW_COUNT()"] == 0
+                raise "concurrency problem"
+            end
         end
     end
 
